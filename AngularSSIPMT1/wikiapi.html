@@ -1,0 +1,39 @@
+<script src="lib/angular/angular.min.js"></script>
+<!-- 42074701db274d53b20184b66f31f55d -->
+<style>
+    .kk{
+        background-color: #ffdddd;
+        border: #990000 groove 10px;
+        margin: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+        text-align: justify;
+    }
+    .kk:hover{
+        transform: scale(1.1);
+        transition: 1s;
+    }
+</style>
+<script>
+    myApp=angular.module("myApp", []);
+    myApp.controller("Ctr", function($scope, $http){
+    var url = "https://en.wikipedia.org/api/rest_v1/feed/trending/edits";    
+    $http.get(url).success(function(data){
+        $scope.articles=data.pages;
+    });
+    });
+</script>
+<html ng-app="myApp" > 
+    <body bgcolor="GRAY">
+    <div ng-controller="Ctr" >
+<h1> <marquee> <i><b>Top Trending !!!  </b></i></marquee></h1>
+     
+        <div class="kk" ng-repeat='s1 in articles | filter : si | orderBy:ob'>
+            <h1>{{ s1.normalizedtitle}}</h1>
+            <p>{{ s1.extract }}</p>
+           
+        </div>
+    </div>
+        </body>
+</html>
+
